@@ -6,9 +6,12 @@ import "./FormikWithMaterial.css";
 import { useState } from "react";
 import MaterialSelectField from "./material-inputs/MaterialSelectField";
 import MaterialCheckboxGroup from "./material-inputs/MaterialCheckboxGroup";
+import Modal from "../modal/Modal";
 
 export default function FormikWithMaterial() {
+
   const [submitedValues, setSubmitedValues] = useState({});
+  const [modalOpened, setModalOpened] = useState(false);
 
   // this could be so better with TS
   const jobOptions = [
@@ -31,7 +34,8 @@ export default function FormikWithMaterial() {
       name: "",
       surname: "",
       job: jobOptions[0].value,
-      job_alt: []
+      job_alt: [],
+      opnion: "",
     },
     validationSchema: Yup.object({
       name: Yup.string().required("Required."),
@@ -52,9 +56,16 @@ export default function FormikWithMaterial() {
             <MaterialTextField name="surname" label="Surname" />
             <MaterialSelectField name="job" label="Job" options={jobOptions}/>
             <MaterialCheckboxGroup name="job_alt" label="Job_alt" options={jobOptions} />
+            <Modal open={modalOpened}>
+              <MaterialTextField name="opnion" label="Opnion" />
+              <Button onClick={() => setModalOpened(false)}>Close</Button>
+            </Modal>
             <div className="submit-btn">
-              <Button variant="contained" type="submit">
+              <Button variant="contained" type="submit" style={{ marginRight: '5px' }}>
                 Submit
+              </Button>
+              <Button onClick={() => setModalOpened(!modalOpened)} variant="contained" color="secondary">
+                Modal
               </Button>
             </div>
           </Form>
