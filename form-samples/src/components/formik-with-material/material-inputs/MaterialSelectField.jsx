@@ -1,4 +1,4 @@
-import { FormLabel, MenuItem, Select } from "@mui/material";
+import { FormHelperText, FormLabel, MenuItem, Select } from "@mui/material";
 import { useField } from "formik";
 
 export default function MaterialSelectField({ label, options, ...props }) {
@@ -11,14 +11,13 @@ export default function MaterialSelectField({ label, options, ...props }) {
         fullWidth
         {...props}
         {...field}
-        error={meta.touched && Boolean(meta.error)}
-        helperText={meta.touched && meta.error}
       >
         {options &&
-          Object.keys(options).map((key) => (
-            <MenuItem value={options[key]}>{key}</MenuItem>
+          options.map((option) => (
+            <MenuItem key={option.label}  value={option.value}>{option.label}</MenuItem>
           ))}
       </Select>
+      { meta.touched && Boolean(meta.error) && <FormHelperText>{ meta.error }</FormHelperText> }
     </>
   );
 }

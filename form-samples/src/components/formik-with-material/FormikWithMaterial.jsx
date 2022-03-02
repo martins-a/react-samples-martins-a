@@ -5,25 +5,37 @@ import Button from "@mui/material/Button";
 import "./FormikWithMaterial.css";
 import { useState } from "react";
 import MaterialSelectField from "./material-inputs/MaterialSelectField";
+import MaterialCheckboxGroup from "./material-inputs/MaterialCheckboxGroup";
 
 export default function FormikWithMaterial() {
   const [submitedValues, setSubmitedValues] = useState({});
 
   // this could be so better with TS
-  const jobOptions = {
-    "Select": 0,
-    "QA tester": 1,
-    "Developer": 2,
-  };
+  const jobOptions = [
+    {
+      value: 0,
+      label: 'Select',
+    },
+    {
+      value: 1,
+      label: 'QA tester',
+    },
+    {
+      value: 2,
+      label: 'Developer',
+    }
+  ]
 
   const formProps = {
     initialValues: {
       name: "",
       surname: "",
-      job: jobOptions.Select,
+      job: jobOptions[0].value,
+      job_alt: []
     },
     validationSchema: Yup.object({
       name: Yup.string().required("Required."),
+      job_alt: Yup.array().min(1, 'Must have 1 item').required('Required.')
     }),
     onSubmit: (values) => {
       setSubmitedValues(values);
@@ -38,6 +50,7 @@ export default function FormikWithMaterial() {
             <MaterialTextField name="name" label="Name" />
             <MaterialTextField name="surname" label="Surname" />
             <MaterialSelectField name="job" label="Job" options={jobOptions}/>
+            <MaterialCheckboxGroup name="job_alt" label="Job_alt" options={jobOptions} />
             <div className="submit-btn">
               <Button variant="contained" type="submit">
                 Submit
