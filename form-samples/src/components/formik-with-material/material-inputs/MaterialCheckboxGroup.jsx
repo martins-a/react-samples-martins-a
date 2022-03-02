@@ -8,8 +8,8 @@ export function MaterialCheckbox({ label, value, ...props}) {
 
     return (
         <>
-             <FormLabel>{label}</FormLabel>
              <Checkbox  type="checkbox" {...field} { ...props } value={value.toString()} />
+             <FormLabel>{label}</FormLabel>
         </>
 
     )
@@ -21,18 +21,20 @@ export default function MaterialCheckboxGroup({ label, options, ...props }) {
 
   return (
     <>
-      <FormLabel>{label}</FormLabel>
-      {options.map((option) => {
-        return (
-            <MaterialCheckbox 
-                { ...props }
-                key={option.label}
-                label={option.label}
-                value={option.value}
-            />
+        <div>
+          <FormLabel>{label}</FormLabel>
+        </div>
+        {options.map((option) => {
+            return (
+                <MaterialCheckbox 
+                    { ...props }
+                    key={option.label}
+                    label={option.label}
+                    value={option.value}
+                />
         );
       })}
-      { meta.touched && Boolean(meta.error) ? <label style={{color: 'red'}}>{ meta.error }</label> : null}
+      { meta.touched && Boolean(meta.error) ? <div style={{color: 'red'}}>{ meta.error }</div> : null}
     </>
   );
 }

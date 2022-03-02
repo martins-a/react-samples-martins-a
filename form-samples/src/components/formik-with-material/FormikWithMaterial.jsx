@@ -35,6 +35,7 @@ export default function FormikWithMaterial() {
     },
     validationSchema: Yup.object({
       name: Yup.string().required("Required."),
+      job: Yup.number().min(1, 'Please, select a valid option'),
       job_alt: Yup.array().min(1, 'Must have 1 item').required('Required.')
     }),
     onSubmit: (values) => {
