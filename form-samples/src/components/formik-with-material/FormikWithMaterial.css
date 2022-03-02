@@ -1,0 +1,19 @@
+.form-wrapper {
+    width: 700px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.submit-btn {
+    margin-top: 20px;
+}
+
+.values-debugger {
+    background-color: black;
+    color: yellow;
+    width: 600px;
+    margin-top: 10px;
+    padding: 10px;
+    overflow: auto;
+}
